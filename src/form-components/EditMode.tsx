@@ -10,6 +10,12 @@ import { Form } from "react-bootstrap";
  * Whether or not the user is a student should be controlled by a regular checkbox, not a switch or button
  */
 
+/**
+ * fails the following tests:
+ * Editing the name and student status changes the text &
+ * Different name, click student box twice changes the text
+ */
+
 export function EditMode(): React.JSX.Element {
     const [studentInfo, setStudentInfo] = useState<string>("Your Name");
     const [isStudent, setIsStudent] = useState<boolean>(true);

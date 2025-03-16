@@ -19,14 +19,16 @@ export function GiveAttempts(): React.JSX.Element {
             <h3>Give Attempts</h3>
             <p>Attempts: {attempts}</p>
             <Form.Group>
-                <Form.Label>Attempts:</Form.Label>
                 <Form.Control
                     type="number"
                     value={requests}
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                        setRequests(parseInt(event.target.value)) ? 0 : parseInt(event.target.value));
+                        if (!event.target.value) {
+                            setRequests("");
+                        } else {
+                            setRequests(event.target.value);
+                        }
                     }}
-                    disabled={attempts === 0}
                 />
             </Form.Group>
             <Button
@@ -39,7 +41,9 @@ export function GiveAttempts(): React.JSX.Element {
             </Button>
             <Button
                 onClick={() => {
-                    setAttempts(attempts + requests);
+                    if (requests && !isNaN(parseInt(requests))) {
+                        setAttempts(attempts + parseInt(requests));
+                    }
                 }}
             >
                 Gain
