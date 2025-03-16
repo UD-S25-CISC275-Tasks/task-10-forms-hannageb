@@ -24,7 +24,7 @@ export function GiveAttempts(): React.JSX.Element {
                     type="number"
                     value={requests}
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                        setRequests(isNaN(parseInt(event.target.value)) ? 0 : parseInt(event.target.value));
+                        setRequests(parseInt(event.target.value)) ? 0 : parseInt(event.target.value));
                     }}
                     disabled={attempts === 0}
                 />
