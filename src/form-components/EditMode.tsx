@@ -32,25 +32,21 @@ export function EditMode(): React.JSX.Element {
                 checked={editMode}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                     setEditMode(event.target.checked);
-                    if (!event.target.checked) {
-                        setStudentInfo("Your Name");
-                        setIsStudent(true);
-                    }
                 }}
             />
             {editMode && (
-                <Form.Check
-                    type="checkbox"
-                    id="is-student"
-                    label="Student?"
-                    checked={isStudent}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                        setIsStudent(event.target.checked);
-                    }}
-                />
-            )}
-            {editMode ?
                 <div>
+                    <Form.Check
+                        type="checkbox"
+                        id="is-student"
+                        label="Student?"
+                        checked={isStudent}
+                        onChange={(
+                            event: React.ChangeEvent<HTMLInputElement>,
+                        ) => {
+                            setIsStudent(event.target.checked);
+                        }}
+                    />
                     <Form.Control
                         value={studentInfo}
                         onChange={(
@@ -59,12 +55,13 @@ export function EditMode(): React.JSX.Element {
                             setStudentInfo(event.target.value);
                         }}
                     />
-                    <div>
-                        {studentInfo} is{" "}
-                        {isStudent ? "a student" : "not a student"}
-                    </div>
                 </div>
-            :   <div>Your Name is a student</div>}
+            )}
+            {!editMode && (
+                <p>
+                    {studentInfo} is {isStudent ? "a student" : "not a student"}
+                </p>
+            )}
         </div>
     );
 }
