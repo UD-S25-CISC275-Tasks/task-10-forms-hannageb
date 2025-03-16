@@ -7,26 +7,39 @@ const COLORS: string[] = [
     "Purple",
     "Cyan",
     "Blue",
-    "Lilac",
+    "Violet",
     "Lime",
-    "Dandelion",
+    "Tomato",
 ];
 
 export function ChangeColor(): React.JSX.Element {
-    const [color] = useState<string>(COLORS[0]);
+    const [color, setColor] = useState<string>(COLORS[0]); // Initial color set to first item
 
     return (
         <div>
             <h3>Change Color</h3>
-            <Form.Group>
-                <Form.Select value={color} onChange={ChangeColor}>
-                    {COLORS.map((c: string) => (
-                        <option key={c} value={c}>
-                            {c}
-                        </option>
-                    ))}
-                </Form.Select>
-            </Form.Group>
+            {COLORS.map((c: string) => (
+                <Form.Check
+                    inline
+                    key={c}
+                    type="radio"
+                    name="colours"
+                    value={c}
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                        setColor(event.target.value);
+                    }}
+                    label={c}
+                />
+            ))}
+            You have chosen
+            <span
+                data-testid="colored-box"
+                style={{
+                    backgroundColor: color,
+                }}
+            >
+                {color}
+            </span>
         </div>
     );
 }
